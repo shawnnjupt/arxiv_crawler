@@ -1,6 +1,6 @@
 import asyncio
 import re
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, timedelta, timezone
 from itertools import chain
 
 import aiohttp
@@ -162,7 +162,7 @@ class ArxivScraper(object):
         为了效率，建议在运行fetch_all后再运行fetch_update
         """
         # 当前时间
-        utc_now = datetime.now(UTC).replace(tzinfo=None)
+        utc_now = datetime.now(timezone.utc).replace(tzinfo=None)
         # 上一次更新最新文章的UTC时间. 除了更新新文章外也可能重新爬取了老文章, 数据库只看最新文章的时间戳。
         last_update = self.paper_db.newest_update_time()
         # 检查一下上次之后的最近一个arxiv更新日期
@@ -422,8 +422,11 @@ if __name__ == "__main__":
     today = date.today()
 
     scraper = ArxivScraper(
-        date_from=today.strftime("%Y-%m-%d"),
-        date_until=today.strftime("%Y-%m-%d"),
+        date_from="2025-02-21",
+        date_until="2025-03-30",
+        category_whitelist=["cs.AI", "cs.LG", "cs.CL", "cs.IR"],
+        optional_keywords=["mamba2","handware"],
+        trans_to=["zh-CN"],
     )
     asyncio.run(scraper.fetch_all())
     scraper.to_markdown(meta=True)

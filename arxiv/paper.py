@@ -3,7 +3,7 @@ import csv
 import sqlite3
 from collections import defaultdict
 from dataclasses import dataclass, fields
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from rich.console import Console
@@ -139,7 +139,7 @@ class PaperDatabase:
                     paper.title_translated,
                     paper.abstract_translated,
                     paper.comments,
-                    datetime.now(UTC).replace(tzinfo=None)
+                    datetime.now(timezone.utc).replace(tzinfo=None)
                 )
                 for paper in papers
             ]

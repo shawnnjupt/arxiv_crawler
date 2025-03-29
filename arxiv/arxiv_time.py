@@ -1,4 +1,4 @@
-from datetime import UTC, datetime, timedelta
+from datetime import timezone, datetime, timedelta
 from functools import lru_cache
 
 HOLIDAY_2024 = [
@@ -20,7 +20,7 @@ def next_arxiv_update_day(time: datetime):
     # see https://info.arxiv.org/help/availability.html
     # arxiv update time is UTC+0 00:00:00
 
-    time.astimezone(UTC)
+    time.astimezone(timezone.utc)
     time_date = time.replace(hour=0, minute=0, second=0, microsecond=0)
     if time > time_date:
         time = time_date + timedelta(days=1)
