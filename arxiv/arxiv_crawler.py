@@ -70,7 +70,7 @@ class ArxivScraper(object):
         """
         返回搜索的元数据
         """
-        return dict(repo_url="https://github.com/huiyeruzhou/arxiv_crawler", **self.__dict__)
+        return dict(repo_url="https://github.com", **self.__dict__)
 
     def get_url(self, start):
         """
@@ -159,7 +159,7 @@ class ArxivScraper(object):
     def fetch_update(self):
         """
         更新文章, 这会从最新公布的文章开始更新, 直到遇到已经爬取过的文章为止。
-        为了效率，建议在运行fetch_all后再运行fetch_update
+        为了效率,建议在运行fetch_all后再运行fetch_update
         """
         # 当前时间
         utc_now = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -422,11 +422,12 @@ if __name__ == "__main__":
     today = date.today()
 
     scraper = ArxivScraper(
-        date_from="2025-02-21",
-        date_until="2025-03-30",
-        category_whitelist=["cs.AI", "cs.LG", "cs.CL", "cs.IR"],
-        optional_keywords=["mamba2","handware"],
-        trans_to=["zh-CN"],
+        date_from="2025-04-21",
+        date_until="2025-04-29",
+        category_whitelist=["cs.AI", "cs.AR", "cs.CL", "cs.IR","cs.CV"],
+        optional_keywords=["quant","llm"],
+        # trans_to=["zh-CN"],
+        proxy="http://127.0.0.1:7890"
     )
     asyncio.run(scraper.fetch_all())
     scraper.to_markdown(meta=True)

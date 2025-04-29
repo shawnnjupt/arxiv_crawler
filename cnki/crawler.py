@@ -41,12 +41,12 @@ def open_page(driver, keyword):
     #     EC.visibility_of_element_located((By.CSS_SELECTOR, 'li[data-val="KY"]'))).click()
 
     # 传入关键字
-    WebDriverWait(driver, 100).until(
+    WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '''//*[@id="gradetxt"]/dd[1]/div[2]/input'''))
     ).send_keys(keyword)
 
     # 点击搜索
-    WebDriverWait(driver, 100).until(
+    WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '''//*[@id="ModuleSearch"]/div[1]/div/div[2]/div/div[1]/div[1]/div[2]/div[3]/input'''))
     ).click()
 
@@ -248,7 +248,7 @@ def crawl(driver, papers_need, theme):
 
 if __name__ == "__main__":
     
-    keyword = "青少年抑郁"
+    keyword = "大模型"
     driver = webserver()
     
     # 设置所需篇数

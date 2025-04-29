@@ -263,7 +263,7 @@ class PaperExporter:
             categories = ",".join(metadata["category_whitelist"])
             optional_keywords = ", ".join(metadata["optional_keywords"])
             preface_str = f"""
-> 本文由 [{repo_url}]({repo_url}) 自动生成
+> @2025 NJU AI产品开发春季课程.All Rights Reserved.
 >
 > 领域白名单：{categories}
 > 关键词： {optional_keywords}
